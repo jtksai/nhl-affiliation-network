@@ -1,0 +1,88 @@
+___________________README____________________
+
+Copyright (C) 2013 Jani Sainio <jani.sainio at utu.fi>
+Distributed under the terms of the GNU General Public License
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
+Please submit any errors at https://github.com/jtksai/nhl-affiliation-network .
+
+------------------------------------------------------
+
+1 Introduction
+
+The nhl-network code is a short python code that can be used to create and
+to analyze an affiliation network of NHL players. In this network any players
+who have been teammates are linked. This is similar to Hollywood actor network
+where any actors are linked if they appeared in the same movie. 
+This network has Kevin Bacon as somewhat of a central node.
+
+The code:
+   - Downloads player data from http://www.databasehockey.com/
+     and uses Beautiful Soup to extract the data from the web pages.
+   - Uses the data to create a list of Player and Team objects.
+   - Calculates various metrics related to the graph.
+   - Outputs the network in a .gml file.
+
+Files included:
+
+  - Python files:
+      - nhl-affiliation-network.py The main code
+      - utils.py Utility functions that are needed when running the main code
+                 
+  - README-file
+
+------------------------------------------------------
+
+2 Installation and dependencies
+
+The code depends on the following python libraries:
+   - BeautifulSoup
+   - Matplotlib
+   - NetworkX
+   - Numpy
+   - requests
+
+No installation is needed. The program uses Infomap to find clusters of nodes
+in the network. Infomap can be downloaded from http://www.mapequation.org/.
+The code uses subprocess call function to call the compiled Infomap to find
+the clusters.
+
+Current version has been tested in Debian Squeeze and Ubuntu 10.04 but it
+should work also in other operating systems. Code has been developed using
+python-2.6.5.
+
+------------------------------------------------------
+
+3 Running
+
+Typing 'python nhl-affiliation-network.py' runs the code. The code can be
+customized to use an already downloaded player database to construct
+the network. Otherwise it will try to dowload the data from the online pages.
+The initial and last years are currently set aas 1917 and 2009, respectively.
+This can be changed, but with the default values the program will download
+all the player data from the site.
+
+The infomap clustering can be disable.
+
+The current program prints to the screen some information of the evaluation
+process. During the download process the program prints the name of the team
+that is being downloaded.
+
+------------------------------------------------------
+
+4 Output
+
+The program outputs a simplified version of the network in pajek form to
+the folder where Infomap is located. This file is then analyzed by Infomap.
+The more detailed network is written as a gml file. This file
+incorporates results of the Infomap clustering and detailed information
+on the players.
+
+------------------------------------------------------
+
+
+Jani Sainio
+jani.sainio@utu.fi
+Department of Physics and Astronomy
+University of Turku
+
